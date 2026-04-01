@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabWorld | Foundational Research System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Noto Serif', 'serif'],
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        :root { color-scheme: light; }
+        html { scroll-behavior: smooth; }
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .serif { font-family: 'Noto Serif', serif; }
+
+        /* Tech Animations */
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+        .tech-shimmer {
+            background: linear-gradient(90deg, #1e40af 0%, #3b82f6 25%, #60a5fa 50%, #3b82f6 75%, #1e40af 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .mono-tag {
+            font-family: 'ui-monospace', 'SFMono-Regular', 'Menlo', monospace;
+            letter-spacing: -0.02em;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar for list */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .primitive-item {
+            transition: all 0.2s ease;
+        }
+        .primitive-item.is-active {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            box-shadow: inset 3px 0 0 0 #3b82f6;
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden text-gray-800 font-sans selection:bg-blue-100 selection:text-blue-900 bg-gray-50 relative">
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-40 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-indigo-200 rounded-full blur-3xl opacity-40 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-purple-200 rounded-full blur-3xl opacity-40 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <main id="top" class="relative z-10">
+        <!-- Hero -->
+        <section class="relative flex min-h-screen flex-col justify-center border-b border-gray-200/60 bg-white/30 backdrop-blur-sm px-4 py-16 md:px-6 md:py-20">
+            <div class="absolute left-0 right-0 top-0 flex items-start justify-end px-4 py-4 md:px-8 md:py-6">
+                <div class="scroll-reveal flex flex-wrap items-center justify-end gap-3 md:gap-4">
+                    <div class="bg-white rounded-lg p-1.5 shadow-sm">
+                        <img src="images/stanford.png" alt="Stanford" class="h-4 md:h-5 object-contain opacity-90 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="bg-white rounded-lg p-1.5 shadow-sm">
+                        <img src="images/princeton.png" alt="Princeton" class="h-4 md:h-5 object-contain opacity-90 hover:opacity-100 transition-opacity">
+                    </div>
+                    <a href="https://www.ai4s-catalyst.com/" target="_blank" class="bg-white rounded-lg p-1.5 shadow-sm hidden md:block">
+                        <img src="images/ai4sinstitute.png" alt="AI4S Institute" class="h-4 md:h-5 object-contain opacity-90 hover:opacity-100 transition-opacity">
+                    </a>
+                    <a href="https://auto-bio.ai" target="_blank" class="bg-white rounded-lg p-1.5 shadow-sm block">
+                        <img src="images/autobio.jpg" alt="autobio" class="h-4 md:h-5 object-contain opacity-90 hover:opacity-100 transition-opacity">
+                    </a>
+                </div>
+            </div>
+
+            <div class="mx-auto max-w-6xl pt-10 text-center md:pt-14">
+                <div class="scroll-reveal mb-8 md:mb-10 flex flex-col md:flex-row items-center justify-center gap-4">
+                    <img src="images/logo.png" alt="LabWorld Logo" class="h-20 w-20 md:h-24 md:w-24 object-contain rounded-2xl shadow-sm bg-white p-2">
+                    <h1 class="text-5xl font-extrabold tracking-tight text-gray-900 md:text-7xl lg:text-8xl">
+                        Lab<span class="tech-shimmer">World</span>
+                    </h1>
+                </div>
+
+                <div class="scroll-reveal overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-xl max-w-5xl mx-auto mt-12">
+                    <video autoplay muted loop playsinline controls class="block max-h-[70vh] w-full object-cover">
+                        <source src="video/front.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept Section -->
+        <section id="concept" class="py-20 bg-white border-b border-gray-200">
+            <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-6 text-left">
+                    <div class="p-8 rounded-2xl border border-gray-200 bg-gray-50 shadow-sm relative scroll-reveal">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">1. Atomic Tasks</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Fundamental primitives like grasp, transfer, and dispense. The core building blocks.</p>
+                    </div>
+                    <div class="p-8 rounded-2xl border border-gray-200 bg-gray-50 shadow-sm relative scroll-reveal" style="transition-delay: 100ms;">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">2. Device Operations</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Complex interactions with specific benchtop instruments (e.g., centrifuges, thermal mixers).</p>
+                    </div>
+                    <div class="p-8 rounded-2xl border border-gray-200 bg-gray-50 shadow-sm relative scroll-reveal" style="transition-delay: 200ms;">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">3. Protocols</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">End-to-end biological workflows composed of multiple device operations and atomic tasks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Atomic Task Demonstrations -->
+        <section id="atomic-tasks" class="py-20 bg-gray-50/50">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 scroll-reveal">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
+                        A Full-Stack Biology Execution Engine
+                    </h2>
+                    <p class="mt-4 text-gray-600 text-lg">
+                        A foundational set of primitive motions designed to be composable into higher-level workflows.
+                    </p>
+                </div>
+
+                <div class="grid gap-8 lg:grid-cols-[1fr_350px]">
+                    <!-- Main Video Area -->
+                    <div class="scroll-reveal glass-panel rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col h-fit lg:sticky lg:top-8">
+                        <div class="flex flex-wrap justify-between items-start mb-4 gap-4">
+                            <div>
+                                <h3 id="demo-title" class="text-2xl font-bold text-gray-900">Pickup</h3>
+                                <p id="demo-desc" class="text-sm text-gray-600 mt-2 leading-relaxed max-w-lg">Baseline grasp-and-lift motion used to move an object cleanly from one location to the next.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-hidden rounded-xl border border-gray-200 bg-black shadow-inner flex-grow flex flex-col justify-center">
+                            <video id="demo-player" controls autoplay muted loop playsinline class="w-full h-auto max-h-[60vh] object-contain">
+                                <source src="logo/pickup_multiview.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        
+                        <div id="demo-tags" class="mt-5 flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <!-- Minimal List Area -->
+                    <div class="scroll-reveal flex flex-col h-[70vh] overflow-y-auto pr-2 custom-scrollbar border border-gray-200 rounded-2xl bg-white p-2 shadow-sm" id="demo-list">
+                        <!-- JS injected list of minimal cards -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team -->
+        <section id="team" class="bg-gray-50 py-20 border-t border-gray-200">
+            <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+                <div class="grid gap-12 md:grid-cols-2">
+                    <!-- Left: Core Authors -->
+                    <div class="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm flex flex-col h-full scroll-reveal">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i data-lucide="users" class="text-blue-600 mr-3 h-5 w-5"></i> Principal Investigators
+                        </h3>
+                        <div class="space-y-4 flex-grow">
+                            <a href="https://profiles.stanford.edu/186687" target="_blank" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+                                <span class="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">Le Cong</span>
+                                <div class="bg-white rounded-lg p-1.5 shadow-sm">
+                                    <img src="images/stanford.png" alt="Stanford" class="h-6 object-contain opacity-90">
+                                </div>
+                            </a>
+                            <a href="https://ece.princeton.edu/people/mengdi-wang" target="_blank" class="flex items-center justify-between p-4 bg-gray-50 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+                                <span class="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">Mengdi Wang</span>
+                                <div class="bg-white rounded-lg p-1.5 shadow-sm">
+                                    <img src="images/princeton.png" alt="Princeton" class="h-6 object-contain opacity-90">
+                                </div>
+                            </a>
+                            <div class="mt-6 pt-4 border-t border-gray-200">
+                                <p class="text-sm text-gray-600">
+                                    <span class="font-semibold text-blue-600">Contributors include:</span><br>
+                                    <span class="font-medium mt-1 block text-gray-800">
+                                        <a href="https://wu-yc.github.io/" target="_blank" class="hover:text-blue-600 transition-colors">Yingcheng Charles Wu</a>, 
+                                        Xi Wang, 
+                                        Bowen Lu, 
+                                        <a href="https://www.linkedin.com/in/olliejian1999" target="_blank" class="hover:text-blue-600 transition-colors">Jinglin Jian</a>,
+                                        Chengyi Xing,
+                                        Yilin Wei
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Founding Partners -->
+                    <div class="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm flex flex-col h-full scroll-reveal">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i data-lucide="handshake" class="text-blue-600 mr-3 h-5 w-5"></i> Founding Partners
+                        </h3>
+                        <div class="grid grid-cols-2 gap-6 items-center flex-grow content-center">
+                            <a href="https://auto-bio.ai" target="_blank" class="flex items-center justify-center p-4 bg-white border border-gray-100 rounded-xl shadow-sm h-24 hover:shadow-md transition-shadow">
+                                <img src="images/autobio.jpg" alt="AutoBio" class="h-12 object-contain">
+                            </a>
+                            <div class="flex items-center justify-center p-4 bg-white border border-gray-100 rounded-xl shadow-sm h-24 hover:shadow-md transition-shadow">
+                                <img src="images/autox.jpg" alt="AutoX" class="h-12 object-contain">
+                            </div>
+                            <div class="flex items-center justify-center p-4 bg-white border border-gray-100 rounded-xl shadow-sm h-24 hover:shadow-md transition-shadow">
+                                <img src="images/ainoro.jpg" alt="Ainoro" class="h-16 object-contain">
+                            </div>
+                            <div class="flex items-center justify-center p-4 bg-white border border-gray-100 rounded-xl shadow-sm h-24 hover:shadow-md transition-shadow">
+                                <img src="images/nvidia.svg" alt="NVIDIA" class="h-6 object-contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 py-10 text-center text-sm text-white border-t border-gray-800">
+        <p class="font-semibold tracking-wide">Stanford - Princeton AI Co-Scientist Team</p>
+        <p class="mt-4 text-gray-500 text-xs">&copy; <span id="year"></span> LabWorld. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const primitives = [
+            { file: 'logo/pickup_multiview.mp4', title: 'Pickup', description: 'Baseline grasp-and-lift motion used to move an object cleanly from one location to the next.', tags: ['grasp', 'transfer'] },
+            { file: 'logo/insert_multiview.mp4', title: 'Insert', description: 'Precision placement primitive for aligned insertion into a target position.', tags: ['alignment', 'placement'] },
+            { file: 'logo/pipette_multiview.mp4', title: 'Pipette', description: 'Liquid-handling primitive for aspiration and dispense control at the single-action level.', tags: ['liquid handling', 'dispense'] },
+            { file: 'logo/screw_loose_multiview.mp4', title: 'Screw Loose', description: 'Unscrewing operator that isolates rotational release as a reusable motion block.', tags: ['rotation', 'release'] },
+            { file: 'logo/screw_tighten_multiview.mp4', title: 'Screw Tighten', description: 'Tightening operator for secure closure and repeatable torque-driven finishing.', tags: ['rotation', 'closure'] },
+            { file: 'logo/vortex_mixer_multiview.mp4', title: 'Vortex Mixing', description: 'Device-specific handling pattern for vortex mixing actions around the instrument.', tags: ['mixer', 'instrument'] },
+            { file: 'logo/thermal_mixer_multiview.mp4', title: 'Thermal Mixing', description: 'Thermal mixer interaction shown as a dedicated device operation rather than a generic motion.', tags: ['thermal', 'mixer'] },
+            { file: 'logo/insert_centrifuge_5430_multiview.mp4', title: 'Centrifuge 5430 Insert', description: 'Insertion task specialized for the Eppendorf 5430 context, combining precision placement with device awareness.', tags: ['centrifuge', 'insert'] },
+            { file: 'logo/centrifuge_5430_close_lid_multiview.mp4', title: 'Centrifuge 5430 Close', description: 'Lid-closing operation targeted to the 5430 centrifuge, preserving equipment-specific geometry in the interaction.', tags: ['centrifuge', 'lid close'] },
+            { file: 'logo/centrifuge_5910_lid_close_multiview.mp4', title: 'Centrifuge 5910 Close', description: 'Lid-closing task adapted to the 5910 form factor, useful for showing the same operator across multiple devices.', tags: ['centrifuge', 'lid close'] },
+            { file: 'logo/centrifuge_mini_close_lid_multiview.mp4', title: 'Mini Centrifuge Close', description: 'Compact centrifuge lid handling that demonstrates the library scaling to smaller benchtop tools.', tags: ['centrifuge', 'lid close'] },
+            { file: 'logo/pipeline_insert_close_multiview.mp4', title: 'Insert Then Close', description: 'A composed routine that chains insertion and closure into a coherent multi-step pipeline.', tags: ['pipeline', 'insert', 'close'] },
+            { file: 'logo/pipeline_screw_multiview.mp4', title: 'Screw Sequence', description: 'Multi-step screw handling promoted from primitive rotation to workflow-level execution.', tags: ['pipeline', 'screw'] },
+            { file: 'logo/pipeline_thermal_cycler_multiview.mp4', title: 'Thermal Cycler Setup', description: 'Thermal cycler routine represented as a composed execution block rather than a single device interaction.', tags: ['pipeline', 'thermal cycler'] },
+            { file: 'logo/pipeline_thermal_mixer_multiview.mp4', title: 'Thermal Mixer Sequence', description: 'Composed thermal mixer sequence showing how device actions are promoted into a reusable workflow unit.', tags: ['pipeline', 'thermal mixer'] },
+            { file: 'logo/pipeline_vortex_mix_multiview.mp4', title: 'Vortex Mix Sequence', description: 'Higher-order mixing routine organized as a full pipeline step for protocol assembly.', tags: ['pipeline', 'vortex mix'] },
+        ];
+
+        const demoList = document.getElementById('demo-list');
+        const demoPlayer = document.getElementById('demo-player');
+        const demoTitle = document.getElementById('demo-title');
+        const demoDesc = document.getElementById('demo-desc');
+        const demoTags = document.getElementById('demo-tags');
+
+        let activePrimitive = primitives[0];
+
+        function renderList() {
+            demoList.innerHTML = '';
+
+            primitives.forEach((primitive) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'primitive-item w-full text-left p-4 rounded-xl border border-transparent hover:bg-gray-50 focus:outline-none flex flex-col gap-1.5';
+                if (primitive.file === activePrimitive.file) {
+                    btn.classList.add('is-active');
+                }
+
+                btn.innerHTML = `
+                    <h4 class="text-sm font-bold text-gray-900">${primitive.title}</h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        ${primitive.tags.map(tag => `<span class="text-[10px] uppercase font-bold tracking-wider text-gray-500 bg-gray-100 border border-gray-200 px-1.5 py-0.5 rounded">${tag}</span>`).join('')}
+                    </div>
+                `;
+
+                btn.addEventListener('click', () => {
+                    activePrimitive = primitive;
+                    renderList();
+                    updatePreview();
+                });
+
+                demoList.appendChild(btn);
+            });
+        }
+
+        function updatePreview() {
+            demoTitle.textContent = activePrimitive.title;
+            demoDesc.textContent = activePrimitive.description;
+
+            demoTags.innerHTML = '';
+            activePrimitive.tags.forEach((tag) => {
+                const tagEl = document.createElement('span');
+                tagEl.className = 'mono-tag rounded bg-gray-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-gray-600 border border-gray-200 shadow-sm';
+                tagEl.textContent = tag;
+                demoTags.appendChild(tagEl);
+            });
+
+            demoPlayer.src = activePrimitive.file;
+            demoPlayer.load();
+            const playPromise = demoPlayer.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {});
+            }
+        }
+
+        // Intersection Observer for scroll animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-reveal').forEach((el) => {
+            revealObserver.observe(el);
+        });
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Initialize
+        renderList();
+        updatePreview();
+        if(window.lucide) {
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
