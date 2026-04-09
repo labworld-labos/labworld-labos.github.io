@@ -127,8 +127,8 @@
                     </h1>
                 </div>
 
-                <div class="scroll-reveal overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-xl max-w-5xl mx-auto mt-12">
-                    <video autoplay muted loop playsinline controls class="block max-h-[70vh] w-full object-cover">
+                <div class="scroll-reveal overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-xl max-w-5xl mx-auto mt-12 aspect-video">
+                    <video autoplay muted loop playsinline controls class="block h-full w-full object-cover">
                         <source src="video/front.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -136,62 +136,23 @@
             </div>
         </section>
 
-        <!-- Concept Section -->
-        <section id="concept" class="py-20 bg-white border-b border-gray-200">
-            <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-3 gap-6 text-left">
-                    <div class="p-8 rounded-2xl border border-gray-200 bg-gray-50 shadow-sm relative scroll-reveal">
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">1. Atomic Tasks</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">Fundamental primitives like grasp, transfer, and dispense. The core building blocks.</p>
-                    </div>
-                    <div class="p-8 rounded-2xl border border-gray-200 bg-gray-50 shadow-sm relative scroll-reveal" style="transition-delay: 100ms;">
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">2. Device Operations</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">Complex interactions with specific benchtop instruments (e.g., centrifuges, thermal mixers).</p>
-                    </div>
-                    <div class="p-8 rounded-2xl border border-gray-200 bg-gray-50 shadow-sm relative scroll-reveal" style="transition-delay: 200ms;">
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">3. Protocols</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">End-to-end biological workflows composed of multiple device operations and atomic tasks.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Atomic Task Demonstrations -->
-        <section id="atomic-tasks" class="py-20 bg-gray-50/50">
+        <!-- LabWorld - RL -->
+        <section id="labworld-rl" class="py-20 bg-gray-50/50">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-12 scroll-reveal">
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
-                        A Full-Stack Biology Execution Engine
-                    </h2>
-                    <p class="mt-4 text-gray-600 text-lg">
-                        A foundational set of primitive motions designed to be composable into higher-level workflows.
-                    </p>
+                <div class="mx-auto max-w-6xl text-center mb-12">
+                    <div class="scroll-reveal mb-8 md:mb-10 flex flex-col md:flex-row items-center justify-center gap-4">
+                        <img src="images/logo2.png" alt="LabWorld RL Logo" class="h-20 w-20 md:h-24 md:w-24 object-contain rounded-2xl shadow-sm bg-white p-2">
+                        <h2 class="text-5xl font-extrabold tracking-tight text-gray-900 md:text-7xl">
+                            Lab<span class="tech-shimmer">World</span> - RL
+                        </h2>
+                    </div>
                 </div>
 
-                <div class="grid gap-8 lg:grid-cols-[1fr_350px]">
-                    <!-- Main Video Area -->
-                    <div class="scroll-reveal glass-panel rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col h-fit lg:sticky lg:top-8">
-                        <div class="flex flex-wrap justify-between items-start mb-4 gap-4">
-                            <div>
-                                <h3 id="demo-title" class="text-2xl font-bold text-gray-900">Pickup</h3>
-                                <p id="demo-desc" class="text-sm text-gray-600 mt-2 leading-relaxed max-w-lg">Baseline grasp-and-lift motion used to move an object cleanly from one location to the next.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="overflow-hidden rounded-xl border border-gray-200 bg-black shadow-inner flex-grow flex flex-col justify-center">
-                            <video id="demo-player" controls autoplay muted loop playsinline class="w-full h-auto max-h-[60vh] object-contain">
-                                <source src="logo/pickup_multiview.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        
-                        <div id="demo-tags" class="mt-5 flex flex-wrap gap-2"></div>
-                    </div>
-
-                    <!-- Minimal List Area -->
-                    <div class="scroll-reveal flex flex-col h-[70vh] overflow-y-auto pr-2 custom-scrollbar border border-gray-200 rounded-2xl bg-white p-2 shadow-sm" id="demo-list">
-                        <!-- JS injected list of minimal cards -->
-                    </div>
+                <div class="scroll-reveal overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-xl max-w-5xl mx-auto aspect-video">
+                    <video autoplay muted loop playsinline controls class="block h-full w-full object-cover">
+                        <source src="video/front2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </section>
@@ -228,6 +189,7 @@
                                         <a href="https://www.linkedin.com/in/olliejian1999" target="_blank" class="hover:text-blue-600 transition-colors">Jinglin Jian</a>,
                                         Chengyi Xing,
                                         Yilin Wei,
+                                        Ling Yang,
                                         David Smerkous,
                                         Fuxin Li
                                     </span>
@@ -267,81 +229,6 @@
     </footer>
 
     <script>
-        const primitives = [
-            { file: 'logo/pickup_multiview.mp4', title: 'Pickup', description: 'Baseline grasp-and-lift motion used to move an object cleanly from one location to the next.', tags: ['grasp', 'transfer'] },
-            { file: 'logo/insert_multiview.mp4', title: 'Insert', description: 'Precision placement primitive for aligned insertion into a target position.', tags: ['alignment', 'placement'] },
-            { file: 'logo/pipette_multiview.mp4', title: 'Pipette', description: 'Liquid-handling primitive for aspiration and dispense control at the single-action level.', tags: ['liquid handling', 'dispense'] },
-            { file: 'logo/screw_loose_multiview.mp4', title: 'Screw Loose', description: 'Unscrewing operator that isolates rotational release as a reusable motion block.', tags: ['rotation', 'release'] },
-            { file: 'logo/screw_tighten_multiview.mp4', title: 'Screw Tighten', description: 'Tightening operator for secure closure and repeatable torque-driven finishing.', tags: ['rotation', 'closure'] },
-            { file: 'logo/vortex_mixer_multiview.mp4', title: 'Vortex Mixing', description: 'Device-specific handling pattern for vortex mixing actions around the instrument.', tags: ['mixer', 'instrument'] },
-            { file: 'logo/thermal_mixer_multiview.mp4', title: 'Thermal Mixing', description: 'Thermal mixer interaction shown as a dedicated device operation rather than a generic motion.', tags: ['thermal', 'mixer'] },
-            { file: 'logo/insert_centrifuge_5430_multiview.mp4', title: 'Centrifuge 5430 Insert', description: 'Insertion task specialized for the Eppendorf 5430 context, combining precision placement with device awareness.', tags: ['centrifuge', 'insert'] },
-            { file: 'logo/centrifuge_5430_close_lid_multiview.mp4', title: 'Centrifuge 5430 Close', description: 'Lid-closing operation targeted to the 5430 centrifuge, preserving equipment-specific geometry in the interaction.', tags: ['centrifuge', 'lid close'] },
-            { file: 'logo/centrifuge_5910_lid_close_multiview.mp4', title: 'Centrifuge 5910 Close', description: 'Lid-closing task adapted to the 5910 form factor, useful for showing the same operator across multiple devices.', tags: ['centrifuge', 'lid close'] },
-            { file: 'logo/centrifuge_mini_close_lid_multiview.mp4', title: 'Mini Centrifuge Close', description: 'Compact centrifuge lid handling that demonstrates the library scaling to smaller benchtop tools.', tags: ['centrifuge', 'lid close'] },
-            { file: 'logo/pipeline_insert_close_multiview.mp4', title: 'Insert Then Close', description: 'A composed routine that chains insertion and closure into a coherent multi-step pipeline.', tags: ['pipeline', 'insert', 'close'] },
-            { file: 'logo/pipeline_screw_multiview.mp4', title: 'Screw Sequence', description: 'Multi-step screw handling promoted from primitive rotation to workflow-level execution.', tags: ['pipeline', 'screw'] },
-            { file: 'logo/pipeline_thermal_cycler_multiview.mp4', title: 'Thermal Cycler Setup', description: 'Thermal cycler routine represented as a composed execution block rather than a single device interaction.', tags: ['pipeline', 'thermal cycler'] },
-            { file: 'logo/pipeline_thermal_mixer_multiview.mp4', title: 'Thermal Mixer Sequence', description: 'Composed thermal mixer sequence showing how device actions are promoted into a reusable workflow unit.', tags: ['pipeline', 'thermal mixer'] },
-            { file: 'logo/pipeline_vortex_mix_multiview.mp4', title: 'Vortex Mix Sequence', description: 'Higher-order mixing routine organized as a full pipeline step for protocol assembly.', tags: ['pipeline', 'vortex mix'] },
-        ];
-
-        const demoList = document.getElementById('demo-list');
-        const demoPlayer = document.getElementById('demo-player');
-        const demoTitle = document.getElementById('demo-title');
-        const demoDesc = document.getElementById('demo-desc');
-        const demoTags = document.getElementById('demo-tags');
-
-        let activePrimitive = primitives[0];
-
-        function renderList() {
-            demoList.innerHTML = '';
-
-            primitives.forEach((primitive) => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'primitive-item w-full text-left p-4 rounded-xl border border-transparent hover:bg-gray-50 focus:outline-none flex flex-col gap-1.5';
-                if (primitive.file === activePrimitive.file) {
-                    btn.classList.add('is-active');
-                }
-
-                btn.innerHTML = `
-                    <h4 class="text-sm font-bold text-gray-900">${primitive.title}</h4>
-                    <div class="flex flex-wrap gap-1.5">
-                        ${primitive.tags.map(tag => `<span class="text-[10px] uppercase font-bold tracking-wider text-gray-500 bg-gray-100 border border-gray-200 px-1.5 py-0.5 rounded">${tag}</span>`).join('')}
-                    </div>
-                `;
-
-                btn.addEventListener('click', () => {
-                    activePrimitive = primitive;
-                    renderList();
-                    updatePreview();
-                });
-
-                demoList.appendChild(btn);
-            });
-        }
-
-        function updatePreview() {
-            demoTitle.textContent = activePrimitive.title;
-            demoDesc.textContent = activePrimitive.description;
-
-            demoTags.innerHTML = '';
-            activePrimitive.tags.forEach((tag) => {
-                const tagEl = document.createElement('span');
-                tagEl.className = 'mono-tag rounded bg-gray-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-gray-600 border border-gray-200 shadow-sm';
-                tagEl.textContent = tag;
-                demoTags.appendChild(tagEl);
-            });
-
-            demoPlayer.src = activePrimitive.file;
-            demoPlayer.load();
-            const playPromise = demoPlayer.play();
-            if (playPromise && typeof playPromise.catch === 'function') {
-                playPromise.catch(() => {});
-            }
-        }
-
         // Intersection Observer for scroll animations
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -358,9 +245,6 @@
 
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Initialize
-        renderList();
-        updatePreview();
         if(window.lucide) {
             lucide.createIcons();
         }
